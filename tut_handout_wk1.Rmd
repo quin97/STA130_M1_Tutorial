@@ -1,0 +1,146 @@
+---
+title: "STA130H1S -- Fall 2022"
+author: 
+subtitle: Week 1 Tutorial Handout
+output:
+  pdf_document: default
+header-includes:
+   - \usepackage{caption}
+   - \captionsetup[figure]{font=scriptsize}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+#### Break the ice (30 min):  
+
+Starting with the TA, ask everyone in the room to talk about:
+
+What is your preferred name (and pronouns, if you wish) ?
+
+One of the following (stick to 1 or 2):
+
+(1) share a boring fact about yourself 
+
+(2) Something in your life that you are grateful for — nothing is too big or too small
+
+(3) Something you really like OR really dislike.
+
+(4) Something you did in the summer
+
+(5) Something interesting about where you're from (at any level, high school, city, province, country)
+
+(6) 2 truths and 1 lie.
+
+
+#### Discussion (25 min) :  
+
+*Divide the students into 4 students/group and keep track of their discussion for grading their participation.
+
+You've seen the example of a survival bias in the R homework this week. Now let's consider another example:
+
+You are a statistician working for the US Statistical Research Group (SRG), which assembled the best American statisticians to the war effort during World War II (role-playing Abraham Wald!). 
+
+You are currently working on a problem about how to best armour the plane. The dilemma being:
+
+- Too much armour is a problem, because planes are heavier, less maneuverable and use more fuel
+
+- Too little armour is a problem, because the planes would get shot down by the enemies
+
+
+Interestingly, you observed that the planes returning from combat were covered in bullet holes, 
+but the holes weren't uniformly distributed across the aircraft:
+
+<!-- ![Source from https://www.trevorbragdon.com/when-data-gives-the-wrong-solution/](Plane_bullet_holes_survivor_bias_1.jpeg) -->
+
+```{r, echo=FALSE, out.width='50%', fig.align='center', fig.cap='Source from https://www.trevorbragdon.com/when-data-gives-the-wrong-solution/'}
+knitr::include_graphics('Plane_bullet_holes_survivor_bias_1.jpeg')
+``` 
+
+
+
+
+\newpage
+
+Based on this observation, you put together a table to summarize the distribution of bullet holes across plane sections:
+
+```{r table2, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+require(pander)
+panderOptions('table.split.table', Inf)
+
+# tabl <- "
+# | Section of plane                        | Bullet holes per square foot |
+# |-----------------------------------------|-----------------------------:|
+# | A. Engine                               | 1.11                         |
+# | B. Fuselage (main body of the aircraft) | 1.73                         |
+# | C. Fuel system                          | 1.55                         |
+# | D. Rest of plane (e.g. wings and tail)  | 1.80                         |
+# "
+# cat(tabl) 
+my.data <- "
+ Section of plane                        | Bullet holes per square foot 
+
+ A. Engine                               | 1.11                         
+ B. Fuselage (main body of the aircraft) | 1.73                         
+ C. Fuel system                          | 1.55                         
+ D. Rest of plane (e.g. wings and tail)  | 1.80                         
+"
+set.caption("Distribution of bullet holes across plane sections")
+df <- read.delim(textConnection(my.data),header=FALSE,sep="|",strip.white=TRUE,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pander(df, style = 'rmarkdown')
+```
+
+<!-- | | | -->
+<!-- |-|-| -->
+<!-- | Section of plane | Bullet holes per square foot | -->
+<!-- | A. Engine | 1.11 | -->
+<!-- | B. Fuselage (main body of the aircraft) | 1.73 | -->
+<!-- | C. Fuel system | 1.55 | -->
+<!-- | D. Rest of plane (e.g. wings and tail) | 1.80 | -->
+
+**Discuss**: 
+
+Which part of the plane has the greatest need for armour?
+Did you all agree? 
+
+Can you change your classmates’ minds to agree with you? Or can they argue persuasively so you agree with them?
+
+#### Writing Activity Primer (15 min) :
+
+Encourage students to exchange answers to the following questions:
+
+1. How is it that you have come to take STA130?
+
+2. Do you currently have a sense of the kind of career (e.g., industry, company, type of work) you think you might want to pursue?  Please describe your current thinking on this aspect of your university experience.
+
+#### Writing prompt (30 min):  
+
+Identify one of the course learning objectives that you are most excited about. Specifically, choose from: 
+
+  1. Implement the computational steps involved in the management and statistical analysis of data using R.
+
+  2. Carry out a variety of statistical analyses in R and interpret the results of the analyses.
+
+  3. Clearly communicate the results of statistical analyses to technical and non-technical audiences.
+
+  4. Identify appropriate uses of statistical methods to answer questions, including their strengths and weaknesses.
+
+  5. Describe how statistical methods can be used to learn from data, including methods for description, explanation, and prediction.
+
+Describe why this objective is especially interesting to you. You may elaborate on this based on your Programs/Subjects of interest and your future career goals. 
+
+### Some general reminders 
+
+- Do not spend more than 30 minutes on the prompt. Hand in the assignment at the end of the tutorial on Quercus.
+
+- Aim for 200 - 500 words. 
+
+- Use full sentences.  
+
+- Grammar is *not* the main focus of the assessment, but it is important that you communicate in a clear and professional manner. I.e., no slang or emojis should appear. 
+
+- Be specific. A good principle when responding to a writing prompt in STA130 is to assume that your audience is not aware of the subject matter (or in this case has not read the syllabus). Therefore, in this case, you need to properly communicate what the objective is putting it in your own words (paraphrasing). You should not just copy the learning objective and put it in quotation marks.  
